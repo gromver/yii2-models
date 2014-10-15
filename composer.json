@@ -1,10 +1,10 @@
 {
-    "name": "menst/models",
+    "name": "menst/yii2-models",
     "description": "Models based on the field specifications.",
     "keywords": ["yii", "model", "phpdoc", "generator"],
     "type": "yii2-extension",
     "homepage": "https://github.com/menst/yii2-models.git",
-    "license": "BSD-3-Clause",
+    "license": "GNU-GPL-v2",
     "authors": [
         {
             "name": "Roman Gayazov",
