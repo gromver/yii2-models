@@ -1,0 +1,15 @@
+.form-horizontal .form-group .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.well .well {
+    background-color: #ffffff;
+}
+.well .well .well {
+    background-color: #f5f5f5;
+}
+
+.help-block:empty:first-child {
+    margin:0
+}
