@@ -12,6 +12,7 @@ namespace menst\models;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
 use yii\base\Object;
+use yii\helpers\StringHelper;
 
 /**
  * Class Model
@@ -90,7 +91,7 @@ class ObjectModel extends DynamicModel {
 
     public function formName()
     {
-        $event = new FormNameEvent(['formName' => basename($this->_sourceClass)]);
+        $event = new FormNameEvent(['formName' => StringHelper::basename($this->_sourceClass)]);
 
         $this->trigger(self::EVENT_FORM_NAME, $event);
 

@@ -17,7 +17,7 @@ use yii\web\AssetBundle;
  * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
  */
 class ModelFormAsset extends AssetBundle {
-    public $sourcePath = '@menst/data/assets';
+    public $sourcePath = '@menst/models/assets';
 
     public $js = [
         'js/structure.js'
