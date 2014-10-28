@@ -63,6 +63,10 @@ class ListField extends BaseField {
         if(isset($this->empty))
             $items = array_merge(['' => empty($this->empty) ? Yii::t('menst.cms', 'Не задано') : $this->empty], $items);
 
+        if (isset($this->editable) && ($value = $this->getValue()) && !array_key_exists($value, $items)) {
+            $items[$value] = $value;
+        }
+
         return $items;
     }
 
