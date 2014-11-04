@@ -10,6 +10,8 @@
 namespace menst\models\fields;
 
 use kartik\widgets\DateTimePicker;
+use yii\base\InvalidConfigException;
+use Yii;
 
 /**
  * Class DateTimeField
@@ -19,7 +21,7 @@ use kartik\widgets\DateTimePicker;
 class DateTimeField extends BaseField {
     public $default;
     public $required;
-    public $format;// = 'd.m.Y H:i';
+    public $format;
 
 
     /**
@@ -29,6 +31,10 @@ class DateTimeField extends BaseField {
     {
         if (isset($this->default)) {
             $this->setValue($this->default);
+        }
+
+        if (!isset($this->format)) {
+            throw new InvalidConfigException(Yii::t('menst.models', __CLASS__ . '::format must be set for {attribute} attribute', ['attribute' => $this->getAttribute()]));
         }
     }
 

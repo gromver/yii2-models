@@ -34,7 +34,7 @@ class MultipleField extends BaseField implements Arrayable {
     public $required;
     public $fieldtype;
     public $extra = 5;
-    public $emptytext = '<em>Пусто</em>';
+    public $emptytext;
 
     const EXTRA_PREFIX = '__';
 
@@ -51,6 +51,7 @@ class MultipleField extends BaseField implements Arrayable {
     {
         $this->_value = new ArrayModel($this->_fieldConfig);
         $this->_value->on(BaseModel::EVENT_FORM_NAME, [$this, 'formName']);
+        $this->_value->on(BaseModel::EVENT_INVOKE, [$this, 'invoke']);
 
         parent::init();
     }
@@ -61,6 +62,14 @@ class MultipleField extends BaseField implements Arrayable {
     public function formName($event)
     {
         $event->formName = Html::getInputName($this->model, $this->attribute);
+    }
+
+    /**
+     * @param $event \menst\models\InvokeEvent
+     */
+    public function invoke($event)
+    {
+        $event->result = $this->model->invoke($event->funcName);
     }
 
     /**
@@ -142,7 +151,6 @@ class MultipleField extends BaseField implements Arrayable {
     }
 
     /**
-     * @param \menst\models\widgets\ActiveForm $form
      * @return string
      */
     protected function renderExtraFields()
@@ -151,6 +159,7 @@ class MultipleField extends BaseField implements Arrayable {
 
         $model = new ArrayModel($this->_fieldConfig);
         $model->on(BaseModel::EVENT_FORM_NAME, [$this, 'prefixedFormName']);
+        $model->on(BaseModel::EVENT_INVOKE, [$this, 'invoke']);
 
         $extra = $this->extra;
         $index = count($this->_value);
@@ -187,7 +196,7 @@ class MultipleField extends BaseField implements Arrayable {
      */
     protected function renderAppendButton()
     {
-        return Html::button('<span class="glyphicon glyphicon-plus"></span> Добавить</span>', [
+        return Html::button('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('menst.models', 'Append') . '</span>', [
             'class' => 'btn btn-info multyfield-append-btn'
         ]);
     }
@@ -197,7 +206,7 @@ class MultipleField extends BaseField implements Arrayable {
      */
     protected function renderEmptyText()
     {
-        return Html::tag('div', $this->emptytext, ['class' => 'help-block multyfield-empty-text', 'style' => 'display: none;']);
+        return Html::tag('div', $this->emptytext ? $this->emptytext : '<em>' . Yii::t('menst.models', 'Empty') . '</em>', ['class' => 'help-block multyfield-empty-text', 'style' => 'display: none;']);
     }
 
     /**
@@ -207,7 +216,7 @@ class MultipleField extends BaseField implements Arrayable {
     {
         $rules = parent::rules();
 
-        $rules[] = [$this->getAttribute(), MultipleValidator::className(), 'required' => !!$this->required, 'structure' => $this->_value];
+        $rules[] = [$this->getAttribute(), MultipleValidator::className(), 'required' => !!$this->required, 'model' => $this->_value];
 
         return $rules;
     }

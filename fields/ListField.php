@@ -33,7 +33,7 @@ class ListField extends BaseField {
         }
 
         if (!isset($this->items)) {
-            throw new InvalidConfigException(Yii::t('menst.cms', 'Укажите аннотацию items для поля {field}', ['field' => $this->getAttribute()]));
+            throw new InvalidConfigException(Yii::t('menst.models', __CLASS__ . '::items must be set for {attribute} attribute', ['attribute' => $this->getAttribute()]));
         }
     }
 
@@ -60,10 +60,12 @@ class ListField extends BaseField {
     private function fetchItems()
     {
         $items = is_array($this->items) ? $this->items : $this->invoke($this->items);
-        if(isset($this->empty))
-            $items = array_merge(['' => empty($this->empty) ? Yii::t('menst.cms', 'Не задано') : $this->empty], $items);
 
-        if (isset($this->editable) && ($value = $this->getValue()) && !array_key_exists($value, $items)) {
+        if (isset($this->empty)) {
+            $items = array_merge(['' => empty($this->empty) ? Yii::t('menst.models', 'Select...') : $this->empty], $items);
+        }
+
+        if (isset($this->editable) && !isset($this->multiple) && ($value = $this->getValue()) && !array_key_exists($value, $items)) {
             $items[$value] = $value;
         }
 
@@ -76,9 +78,10 @@ class ListField extends BaseField {
      */
     public function invoke($callable)
     {
-        if(strpos($callable, '::'))
+        if(strpos($callable, '::')) {
             return call_user_func($callable, $this);
-        else
+        } else {
             return $this->getModel()->invoke($callable);
+        }
     }
 }

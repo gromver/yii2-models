@@ -48,16 +48,16 @@ class TextField extends BaseField {
         $rules[] = [$this->getAttribute(), 'string',
             'min' => strlen($this->min) ? (int)$this->min : null,
             'max' => strlen($this->max) ? (int)$this->max : null,
-            'length' => strlen($this->length) ? (int)$this->length : null/*, 'enableClientValidation'=>false*/];
+            'length' => strlen($this->length) ? (int)$this->length : null];
 
         if(isset($this->required))
-            $rules[] = [$this->getAttribute(), 'required'/*, 'enableClientValidation'=>false*/];
+            $rules[] = [$this->getAttribute(), 'required'];
 
         if(isset($this->pattern))
-            $rules[] = [$this->getAttribute(), 'match', 'pattern' => $this->pattern/*, 'enableClientValidation'=>false*/];
+            $rules[] = [$this->getAttribute(), 'match', 'pattern' => $this->pattern];
 
         if(isset($this->email))
-            $rules[] = [$this->getAttribute(), 'email'/*, 'enableClientValidation'=>false*/];
+            $rules[] = [$this->getAttribute(), 'email'];
 
         return $rules;
     }

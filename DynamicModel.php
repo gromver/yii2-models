@@ -10,9 +10,6 @@
 namespace menst\models;
 
 use menst\models\fields\BaseField;
-use yii\base\InvalidConfigException;
-use yii\base\InvalidParamException;
-use yii\base\Object;
 
 /**
  * Class Model

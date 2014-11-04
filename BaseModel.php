@@ -19,6 +19,7 @@ use yii\base\Model;
 abstract class BaseModel extends Model
 {
     const EVENT_FORM_NAME = 'formName';
+    const EVENT_INVOKE = 'invoke';
 
     public function formName()
     {
@@ -27,6 +28,15 @@ abstract class BaseModel extends Model
         $this->trigger(self::EVENT_FORM_NAME, $event);
 
         return $event->formName;
+    }
+
+    public function invoke($funcName)
+    {
+        $event = new InvokeEvent(['funcName' => $funcName]);
+
+        $this->trigger(self::EVENT_INVOKE, $event);
+
+        return $event->result;
     }
 
     public function rules()

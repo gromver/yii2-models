@@ -32,7 +32,7 @@ class Fields extends Widget
     public function init()
     {
         if (!$this->model instanceof BaseModel) {
-            throw new InvalidConfigException(__CLASS__ . '::model должен быть объектом \menst\models\BaseModel.');
+            throw new InvalidConfigException(__CLASS__ . '::model must be an instance of \menst\models\BaseModel.');
         }
     }
 

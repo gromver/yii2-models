@@ -9,6 +9,7 @@
 
 namespace menst\models\fields;
 use mihaildev\ckeditor\CKEditor;
+use mihaildev\elfinder\ElFinder;
 
 /**
  * Class EditorField
@@ -41,7 +42,7 @@ class EditorField extends BaseField {
         ], $options);
 
         return parent::field($form, $options)->widget(CKEditor::className(), [
-            'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions($this->controller)
+            'editorOptions' => ElFinder::ckeditorOptions($this->controller)
         ]);
     }
 
@@ -49,8 +50,9 @@ class EditorField extends BaseField {
     {
         $rules = parent::rules();
 
-        if(isset($this->required))
-            $rules[] = [$this->getAttribute(), 'required'/*, 'enableClientValidation'=>false*/];
+        if (isset($this->required)) {
+            $rules[] = [$this->getAttribute(), 'required'];
+        }
 
         return $rules;
     }

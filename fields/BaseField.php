@@ -25,7 +25,7 @@ use yii\helpers\Html;
  * @package yii2-models
  * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
  *
- * @property Yii\base\Model $model
+ * @property \menst\models\BaseModel $model
  * @property string $attribute
  * @property mixed $value
  */
@@ -38,6 +38,7 @@ abstract class BaseField extends Object implements Arrayable {
     public $after;
     public $label;
     public $hint;
+    public $translation;
 
     /**
      * @var mixed
@@ -103,7 +104,7 @@ abstract class BaseField extends Object implements Arrayable {
         }
 
         if (!$instance instanceof self) {
-            throw new InvalidParamException('Не удалось создать оъект.');
+            throw new InvalidParamException(__CLASS__ . ' object was not created.');
         }
 
         return $instance;
@@ -180,7 +181,7 @@ abstract class BaseField extends Object implements Arrayable {
 
     protected function label()
     {
-        $label = isset($this->label) ? $this->label : Html::encode($this->model->getAttributeLabel($this->attribute));
+        $label = isset($this->label) ? (isset($this->translation) ? Yii::t($this->translation, $this->label) : $this->label) : Html::encode($this->model->getAttributeLabel($this->attribute));
 
         if ($this->hint) {
             $hintId = Html::getInputId($this->model, $this->attribute) . '-hint';

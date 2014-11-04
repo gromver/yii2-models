@@ -10,6 +10,7 @@
 namespace menst\models\validators;
 
 use yii\validators\Validator;
+use Yii;
 
 /**
  * Class ObjectValidator
@@ -17,11 +18,11 @@ use yii\validators\Validator;
  * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
  */
 class ObjectValidator extends Validator {
-    public $message = 'Форма {attribute} не прошла валидацию.';
+    public $message;
     /**
-     * @var \menst\models\Model
+     * @var \menst\models\ObjectModel
      */
-    public $structure;
+    public $model;
 
     /**
      * @param $value \menst\models\fields\BaseField
@@ -29,8 +30,8 @@ class ObjectValidator extends Validator {
      */
     protected function validateValue($value)
     {
-        if (!$this->structure->validate()) {
-            return [$this->message, []];
+        if (!$this->model->validate()) {
+            return [$this->message ? $this->message : Yii::t('menst.models', 'Field {attribute} contains no valid items.'), []];
         }
     }
 }

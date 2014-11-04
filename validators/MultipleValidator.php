@@ -10,6 +10,7 @@
 namespace menst\models\validators;
 
 use yii\validators\Validator;
+use Yii;
 
 /**
  * Class MultipleValidator
@@ -18,14 +19,12 @@ use yii\validators\Validator;
  */
 class MultipleValidator extends Validator {
     /**
-     * @var \menst\models\MultipleFieldModel
+     * @var \menst\models\ArrayModel
      */
-    public $structure;
-
-    public $message = 'Поле {attribute} имеет не валидные элементы.';
-
+    public $model;
+    public $message;
     public $required = false;
-    public $requiredMessage = 'Поле {attribute} не может быть пустым.';
+    public $requiredMessage;
 
 
     /**
@@ -34,11 +33,12 @@ class MultipleValidator extends Validator {
      */
     protected function validateValue($value)
     {
-        if ($this->required && !count($value->getValue()))
-            return [$this->requiredMessage, []];
+        if ($this->required && !count($value->getValue())) {
+            return [$this->requiredMessage ? $this->requiredMessage : Yii::t('menst.models', 'Field {attribute} can\'t be empty.'), []];
+        }
 
-        if (!$this->structure->validate()) {
-            return [$this->message, []];
+        if (!$this->model->validate()) {
+            return [$this->message ? $this->message : Yii::t('menst.models', 'Field {attribute} contains no valid items.'), []];
         }
     }
 }

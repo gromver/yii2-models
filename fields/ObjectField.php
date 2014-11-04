@@ -29,11 +29,11 @@ class ObjectField extends BaseField
 {
     public $object;
 
-
     public function init()
     {
-        if(!isset($this->object))
-            throw new InvalidConfigException(Yii::t('yii', 'Укажите аннотацию object для поля {field}', array('field'=>$this->getAttribute())));
+        if (!isset($this->object)) {
+            throw new InvalidConfigException(Yii::t('menst.models', __CLASS__ . '::object must be set for {attribute} attribute', ['attribute' => $this->getAttribute()]));
+        }
 
         $this->_value = new ObjectModel($this->object);
         $this->_value->on(BaseModel::EVENT_FORM_NAME, [$this, 'formName']);
@@ -80,7 +80,7 @@ class ObjectField extends BaseField
     public function rules()
     {
         $rules = parent::rules();
-        $rules[] = [$this->getAttribute(), ObjectValidator::className(), 'structure' => $this->_value];
+        $rules[] = [$this->getAttribute(), ObjectValidator::className(), 'model' => $this->_value];
 
         return $rules;
     }

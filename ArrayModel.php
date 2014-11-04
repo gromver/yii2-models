@@ -173,7 +173,8 @@ class ArrayModel extends BaseModel implements \Countable
         if ($this->offsetExists($offset)) {
             $this->data[$offset]->setValue($item);
         } else {
-            $field = BaseField::createField($this->_fieldConfig)->setValue($item)->link($this, $offset);
+            $field = BaseField::createField($this->_fieldConfig)->link($this, $offset);
+            if ($item !== null) $field->setValue($item);
 
             $this->data[$offset] = $field;
 
