@@ -32,7 +32,7 @@ class ObjectField extends BaseField
     public function init()
     {
         if (!isset($this->object)) {
-            throw new InvalidConfigException(Yii::t('menst.models', __CLASS__ . '::object must be set for {attribute} attribute', ['attribute' => $this->getAttribute()]));
+            throw new InvalidConfigException(Yii::t('gromver.models', __CLASS__ . '::object must be set for {attribute} attribute', ['attribute' => $this->getAttribute()]));
         }
 
         $this->_value = new ObjectModel($this->object);

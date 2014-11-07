@@ -196,7 +196,7 @@ class MultipleField extends BaseField implements Arrayable {
      */
     protected function renderAppendButton()
     {
-        return Html::button('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('menst.models', 'Append') . '</span>', [
+        return Html::button('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('gromver.models', 'Append') . '</span>', [
             'class' => 'btn btn-info multyfield-append-btn'
         ]);
     }
@@ -206,7 +206,7 @@ class MultipleField extends BaseField implements Arrayable {
      */
     protected function renderEmptyText()
     {
-        return Html::tag('div', $this->emptytext ? $this->emptytext : '<em>' . Yii::t('menst.models', 'Empty') . '</em>', ['class' => 'help-block multyfield-empty-text', 'style' => 'display: none;']);
+        return Html::tag('div', $this->emptytext ? $this->emptytext : '<em>' . Yii::t('gromver.models', 'Empty') . '</em>', ['class' => 'help-block multyfield-empty-text', 'style' => 'display: none;']);
     }
 
     /**

@@ -34,11 +34,11 @@ class MultipleValidator extends Validator {
     protected function validateValue($value)
     {
         if ($this->required && !count($value->getValue())) {
-            return [$this->requiredMessage ? $this->requiredMessage : Yii::t('menst.models', 'Field {attribute} can\'t be empty.'), []];
+            return [$this->requiredMessage ? $this->requiredMessage : Yii::t('gromver.models', 'Field {attribute} can\'t be empty.'), []];
         }
 
         if (!$this->model->validate()) {
-            return [$this->message ? $this->message : Yii::t('menst.models', 'Field {attribute} contains no valid items.'), []];
+            return [$this->message ? $this->message : Yii::t('gromver.models', 'Field {attribute} contains no valid items.'), []];
         }
     }
 }

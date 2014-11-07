@@ -44,7 +44,7 @@ class ObjectModel extends DynamicModel {
             $this->_source = $source;
             $this->_sourceClass = get_class($source);
         } else {
-            throw new InvalidParamException('$source должен быть объектом или именем класса объекта.');
+            throw new InvalidParamException('$source must be an object or a class name.');
         }
 
         Object::__construct($config);
@@ -57,7 +57,7 @@ class ObjectModel extends DynamicModel {
         self::$_callContext[] = $this->_sourceClass;
         self::$_callStack[md5(json_encode(self::$_callContext))] = $this->_sourceClass;
         if (count(array_keys(self::$_callStack, $this->_sourceClass)) > 1) {
-            throw new InvalidConfigException('Обнаружен бесконечный цикл.');
+            throw new InvalidConfigException('Infinite loop detected.');
         }
 
         //инициализация

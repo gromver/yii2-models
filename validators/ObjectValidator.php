@@ -31,7 +31,7 @@ class ObjectValidator extends Validator {
     protected function validateValue($value)
     {
         if (!$this->model->validate()) {
-            return [$this->message ? $this->message : Yii::t('menst.models', 'Field {attribute} contains no valid items.'), []];
+            return [$this->message ? $this->message : Yii::t('gromver.models', 'Field {attribute} contains no valid items.'), []];
         }
     }
 }

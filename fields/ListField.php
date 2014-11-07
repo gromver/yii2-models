@@ -33,7 +33,7 @@ class ListField extends BaseField {
         }
 
         if (!isset($this->items)) {
-            throw new InvalidConfigException(Yii::t('menst.models', __CLASS__ . '::items must be set for {attribute} attribute', ['attribute' => $this->getAttribute()]));
+            throw new InvalidConfigException(Yii::t('gromver.models', __CLASS__ . '::items must be set for {attribute} attribute', ['attribute' => $this->getAttribute()]));
         }
     }
 
@@ -62,7 +62,7 @@ class ListField extends BaseField {
         $items = is_array($this->items) ? $this->items : $this->invoke($this->items);
 
         if (isset($this->empty)) {
-            $items = array_merge(['' => empty($this->empty) ? Yii::t('menst.models', 'Select...') : $this->empty], $items);
+            $items = array_merge(['' => empty($this->empty) ? Yii::t('gromver.models', 'Select...') : $this->empty], $items);
         }
 
         if (isset($this->editable) && !isset($this->multiple) && ($value = $this->getValue()) && !array_key_exists($value, $items)) {

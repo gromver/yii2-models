@@ -34,7 +34,7 @@ class DateTimeField extends BaseField {
         }
 
         if (!isset($this->format)) {
-            throw new InvalidConfigException(Yii::t('menst.models', __CLASS__ . '::format must be set for {attribute} attribute', ['attribute' => $this->getAttribute()]));
+            throw new InvalidConfigException(Yii::t('gromver.models', __CLASS__ . '::format must be set for {attribute} attribute', ['attribute' => $this->getAttribute()]));
         }
     }
 
