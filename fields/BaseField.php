@@ -1,15 +1,15 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-models.git#readme
+ * @link https://github.com/gromver/yii2-models.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-models/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-models/blob/master/LICENSE
  * @package yii2-models
  * @version 1.0.0
  */
 
-namespace menst\models\fields;
+namespace gromver\models\fields;
 
-use menst\models\BaseModel;
+use gromver\models\BaseModel;
 use Yii;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
@@ -23,9 +23,9 @@ use yii\helpers\Html;
 /**
  * Class BaseField
  * @package yii2-models
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
- * @property \menst\models\BaseModel $model
+ * @property \gromver\models\BaseModel $model
  * @property string $attribute
  * @property mixed $value
  */
@@ -45,7 +45,7 @@ abstract class BaseField extends Object implements Arrayable {
      */
     protected $_value;
     /**
-     * @var \menst\models\BaseModel
+     * @var \gromver\models\BaseModel
      */
     private $_model;
     /**
@@ -54,17 +54,17 @@ abstract class BaseField extends Object implements Arrayable {
     private $_attribute;
 
     public static $builtInFields = [
-        'text' => 'menst\models\fields\TextField',
-        'textarea' => 'menst\models\fields\TextareaField',
-        'list' => 'menst\models\fields\ListField',
-        'select' => 'menst\models\fields\SelectField',
-        'object' => 'menst\models\fields\ObjectField',
-        'multiple' => 'menst\models\fields\MultipleField',
-        'yesno' => ['class' => 'menst\models\fields\ListField', 'items' => ['Нет', 'Да']],
-        'datetime' => 'menst\models\fields\DateTimeField',
-        'modal' => 'menst\models\fields\ModalField',
-        'media' => 'menst\models\fields\MediaField',
-        'editor' => 'menst\models\fields\EditorField'
+        'text' => 'gromver\models\fields\TextField',
+        'textarea' => 'gromver\models\fields\TextareaField',
+        'list' => 'gromver\models\fields\ListField',
+        'select' => 'gromver\models\fields\SelectField',
+        'object' => 'gromver\models\fields\ObjectField',
+        'multiple' => 'gromver\models\fields\MultipleField',
+        'yesno' => ['class' => 'gromver\models\fields\ListField', 'items' => ['Нет', 'Да']],
+        'datetime' => 'gromver\models\fields\DateTimeField',
+        'modal' => 'gromver\models\fields\ModalField',
+        'media' => 'gromver\models\fields\MediaField',
+        'editor' => 'gromver\models\fields\EditorField'
     ];
 
 
@@ -198,7 +198,7 @@ abstract class BaseField extends Object implements Arrayable {
     }
 
     /**
-     * @return \menst\models\ObjectModel
+     * @return \gromver\models\ObjectModel
      */
     public function getModel()
     {

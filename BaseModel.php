@@ -1,20 +1,20 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-models.git#readme
+ * @link https://github.com/gromver/yii2-models.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-models/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-models/blob/master/LICENSE
  * @package yii2-models
  * @version 1.0.0
  */
 
-namespace menst\models;
+namespace gromver\models;
 
 use yii\base\Model;
 
 /**
  * Class BaseModel
  * @package yii2-models
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 abstract class BaseModel extends Model
 {
@@ -44,7 +44,7 @@ abstract class BaseModel extends Model
         $rules = [];
 
         foreach($this->modelFields() as $field) {
-            /** @var \menst\models\fields\BaseField $field */
+            /** @var \gromver\models\fields\BaseField $field */
             $rules = array_merge($rules, $field->rules());
         }
 

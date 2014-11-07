@@ -1,14 +1,14 @@
 {
-    "name": "menst/yii2-models",
+    "name": "gromver/yii2-models",
     "description": "Models based on the field specifications.",
     "keywords": ["yii", "model", "phpdoc", "generator"],
     "type": "yii2-extension",
-    "homepage": "https://github.com/menst/yii2-models.git",
+    "homepage": "https://github.com/gromver/yii2-models.git",
     "license": "GNU-GPL-v2",
     "authors": [
         {
             "name": "Roman Gayazov",
-            "email": "m.e.n.s.t@yandex.ru"
+            "email": "gromver5@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "menst\\models\\": ""
+            "gromver\\models\\": ""
         }
     }
 }

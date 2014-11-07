@@ -1,17 +1,17 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-models.git#readme
+ * @link https://github.com/gromver/yii2-models.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-models/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-models/blob/master/LICENSE
  * @package yii2-models
  * @version 1.0.0
  */
 
-namespace menst\models\widgets;
+namespace gromver\models\widgets;
 
 
-use menst\models\BaseModel;
-use menst\models\ModelFormAsset;
+use gromver\models\BaseModel;
+use gromver\models\ModelFormAsset;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
 /**
  * Class Fields
  * @package yii2-models
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Fields extends Widget
 {
@@ -32,7 +32,7 @@ class Fields extends Widget
     public function init()
     {
         if (!$this->model instanceof BaseModel) {
-            throw new InvalidConfigException(__CLASS__ . '::model must be an instance of \menst\models\BaseModel.');
+            throw new InvalidConfigException(__CLASS__ . '::model must be an instance of \gromver\models\BaseModel.');
         }
     }
 
@@ -44,7 +44,7 @@ class Fields extends Widget
             'layout' => 'horizontal'
         ], $this->formOptions));
 
-        /** @var $field \menst\models\fields\BaseField */
+        /** @var $field \gromver\models\fields\BaseField */
         foreach ($fields as $field) {
             echo $field->field($form, $form->fieldConfig);
         }

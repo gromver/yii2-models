@@ -1,15 +1,15 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-models.git#readme
+ * @link https://github.com/gromver/yii2-models.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-models/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-models/blob/master/LICENSE
  * @package yii2-models
  * @version 1.0.0
  */
 
-namespace menst\models;
+namespace gromver\models;
 
-use menst\models\fields\BaseField;
+use gromver\models\fields\BaseField;
 use yii\base\ArrayAccessTrait;
 use yii\base\Object;
 use yii\validators\Validator;
@@ -17,7 +17,7 @@ use yii\validators\Validator;
 /**
  * Class MultipleFieldModel
  * @package yii2-models
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class ArrayModel extends BaseModel implements \Countable
 {
@@ -27,7 +27,7 @@ class ArrayModel extends BaseModel implements \Countable
      */
     private $_fieldConfig;
     /**
-     * @var \menst\models\fields\BaseField[]
+     * @var \gromver\models\fields\BaseField[]
      */
     private $data = [];
 

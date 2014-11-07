@@ -1,18 +1,18 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-models.git#readme
+ * @link https://github.com/gromver/yii2-models.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-models/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-models/blob/master/LICENSE
  * @package yii2-models
  * @version 1.0.0
  */
 
-namespace menst\models\fields;
+namespace gromver\models\fields;
 
-use menst\models\ArrayModel;
-use menst\models\BaseModel;
-use menst\models\validators\MultipleValidator;
-use menst\models\widgets\Fields;
+use gromver\models\ArrayModel;
+use gromver\models\BaseModel;
+use gromver\models\validators\MultipleValidator;
+use gromver\models\widgets\Fields;
 use Yii;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
@@ -22,7 +22,7 @@ use yii\helpers\Html;
 /**
  * Class MultipleField
  * @package yii2-models
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property ArrayModel $_value
  */
@@ -57,7 +57,7 @@ class MultipleField extends BaseField implements Arrayable {
     }
 
     /**
-     * @param $event \menst\models\FormNameEvent
+     * @param $event \gromver\models\FormNameEvent
      */
     public function formName($event)
     {
@@ -65,7 +65,7 @@ class MultipleField extends BaseField implements Arrayable {
     }
 
     /**
-     * @param $event \menst\models\InvokeEvent
+     * @param $event \gromver\models\InvokeEvent
      */
     public function invoke($event)
     {
@@ -73,7 +73,7 @@ class MultipleField extends BaseField implements Arrayable {
     }
 
     /**
-     * @param $event \menst\models\FormNameEvent
+     * @param $event \gromver\models\FormNameEvent
      */
     public function prefixedFormName($event)
     {

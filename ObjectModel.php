@@ -1,13 +1,13 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-models.git#readme
+ * @link https://github.com/gromver/yii2-models.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-models/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-models/blob/master/LICENSE
  * @package yii2-models
  * @version 1.0.0
  */
 
-namespace menst\models;
+namespace gromver\models;
 
 use yii\base\InvalidConfigException;
 use yii\base\InvalidParamException;
@@ -17,7 +17,7 @@ use yii\helpers\StringHelper;
 /**
  * Class Model
  * @package yii2-models
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
  * Моделька основанная на публичных полях данного объекта
  */
@@ -174,7 +174,7 @@ class ObjectModel extends DynamicModel {
     public function attributeLabels()
     {
         return array_map(function($field) {
-            /** @var $field \menst\models\fields\BaseField */
+            /** @var $field \gromver\models\fields\BaseField */
             return $field->label ? $field->label : $this->generateAttributeLabel($field->attribute);
         }, $this->modelFields());
     }
