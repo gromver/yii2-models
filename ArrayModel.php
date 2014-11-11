@@ -180,7 +180,7 @@ class ArrayModel extends BaseModel implements \Countable
 
             $rules = $field->rules();
 
-            foreach($rules as $rule) {
+            foreach ($rules as $rule) {
                 $this->addRule((string)$rule[0], $rule[1], array_slice($rule, 2));
             }
         }

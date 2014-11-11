@@ -22,7 +22,7 @@ yii.multyfield = (function ($) {
                 });
 
                 $container.on("click", "> div > .form-group .multyfield-close-btn", function (e) {
-                    $(this).parents(".form-group:first").hide("slow", function () {
+                    $(this).parents(".form-group:first").hide(300, function () {
                         $(this).remove();
                         normalize($container);
                     });

@@ -41,6 +41,9 @@ class MultipleField extends BaseField implements Arrayable {
     public function __construct($config)
     {
         $config['type'] = $config['fieldtype'];
+        if (isset($config['default']) && is_array($config['default'])) {
+            unset($config['default']);
+        }
 
         $this->_fieldConfig = $config;
 
@@ -65,14 +68,6 @@ class MultipleField extends BaseField implements Arrayable {
     }
 
     /**
-     * @param $event \gromver\models\InvokeEvent
-     */
-    public function invoke($event)
-    {
-        $event->result = $this->model->invoke($event->funcName);
-    }
-
-    /**
      * @param $event \gromver\models\FormNameEvent
      */
     public function prefixedFormName($event)
@@ -80,9 +75,18 @@ class MultipleField extends BaseField implements Arrayable {
         $event->formName = self::EXTRA_PREFIX . Html::getInputName($this->model, $this->attribute);
     }
 
+    /**
+     * @param $event \gromver\models\InvokeEvent
+     */
+    public function invoke($event)
+    {
+        $event->result = $this->model->invoke($event->funcName);
+    }
+
     public function setValue($values)
     {
-        $this->_value->setAttributes((array)$values);
+        // если $values имеет пустой значение, то принимаем его за пустой массив, в противном случае кастуем значение в массив
+        $this->_value->setAttributes(empty($values) ? [] : (array)$values);
 
         return $this;
     }
@@ -105,7 +109,7 @@ class MultipleField extends BaseField implements Arrayable {
      */
     public function field($form, $options = [])
     {
-        if ($this->fieldtype == 'object')
+        if ($this->fieldtype == 'object') {
             $options = ArrayHelper::merge([
                 'template' => "{before}\n{label}\n{beginWrapper}\n{error}\n{input}\n{endWrapper}\n{hint}\n{after}",
                 'wrapperOptions' => [
@@ -115,10 +119,11 @@ class MultipleField extends BaseField implements Arrayable {
                     'class' => 'h2'
                 ]
             ], $options);
-        else
+        } else {
             $options = ArrayHelper::merge([
                 'template' => "{before}\n{label}\n{beginWrapper}\n{error}\n{input}\n{endWrapper}\n{hint}\n{after}"
             ], $options);
+        }
 
         $options['parts']['{input}'] = Html::tag('div', $this->renderEmptyText() . $this->renderFields() . $this->renderExtraFields(), ['class' => 'multyfield-container']);
 
@@ -155,7 +160,9 @@ class MultipleField extends BaseField implements Arrayable {
      */
     protected function renderExtraFields()
     {
-        if($this->extra <= 0) return '';
+        if ($this->extra <= 0) {
+            return '';
+        }
 
         $model = new ArrayModel($this->_fieldConfig);
         $model->on(BaseModel::EVENT_FORM_NAME, [$this, 'prefixedFormName']);
@@ -164,7 +171,7 @@ class MultipleField extends BaseField implements Arrayable {
         $extra = $this->extra;
         $index = count($this->_value);
 
-        while($extra--) {
+        while ($extra--) {
             $model[$index++] = null;
         }
 
@@ -206,7 +213,7 @@ class MultipleField extends BaseField implements Arrayable {
      */
     protected function renderEmptyText()
     {
-        return Html::tag('div', $this->emptytext ? $this->emptytext : '<em>' . Yii::t('gromver.models', 'Empty') . '</em>', ['class' => 'help-block multyfield-empty-text', 'style' => 'display: none;']);
+        return Html::tag('div', $this->emptytext ? ($this->translation ? Yii::t($this->translation, $this->emptytext) : $this->emptytext) : '<em>' . Yii::t('gromver.models', 'Empty') . '</em>' . Html::hiddenInput(Html::getInputName($this->getModel(), $this->getAttribute())), ['class' => 'help-block multyfield-empty-text', 'style' => 'display: none;']);
     }
 
     /**

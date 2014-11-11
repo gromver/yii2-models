@@ -118,12 +118,13 @@ class ObjectModel extends DynamicModel {
             $defaultProperties = $reflection->getDefaultProperties();
             foreach($properties as $property)
             {
-                if($property->isStatic()) continue;
+                if ($property->isStatic()) continue;
 
                 $settings = self::processProperty($property);
 
-                if(!isset($settings['default']))
+                if (!isset($settings['default'])) {
                     $settings['default'] = $defaultProperties[$property->getName()];
+                }
 
                 $specification[$property->getName()] = $settings;
             }
