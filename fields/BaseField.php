@@ -163,8 +163,8 @@ abstract class BaseField extends Object implements Arrayable {
         $options = ArrayHelper::merge([
             'template' => "{before}\n{label}\n{beginWrapper}\n{input}\n{error}\n{endWrapper}\n{hint}\n{after}",
             'parts' => [
-                '{before}' => $this->before,
-                '{after}' => $this->after
+                '{before}' => $this->before ? ($this->translation ? Yii::t($this->translation, $this->before) : $this->before) : null,
+                '{after}' => $this->after ? ($this->translation ? Yii::t($this->translation, $this->after) : $this->after) : null
             ],
             'inputOptions' => [
                 'disabled' => $this->disabled
@@ -181,7 +181,11 @@ abstract class BaseField extends Object implements Arrayable {
 
     protected function label()
     {
-        $label = isset($this->label) ? (isset($this->translation) ? Yii::t($this->translation, $this->label) : $this->label) : Html::encode($this->model->getAttributeLabel($this->attribute));
+        $label = isset($this->label) ? $this->label : Html::encode($this->model->getAttributeLabel($this->attribute));
+
+        if ($this->translation) {
+            $label = Yii::t($this->translation, $label);
+        }
 
         if ($this->hint) {
             $hintId = Html::getInputId($this->model, $this->attribute) . '-hint';
