@@ -20,6 +20,7 @@ class EditorField extends BaseField {
     public $default;
     public $required;
     public $controller;
+    public $editorOptions = [];
 
 
     public function init()
@@ -42,7 +43,7 @@ class EditorField extends BaseField {
         ], $options);
 
         return parent::field($form, $options)->widget(CKEditor::className(), [
-            'editorOptions' => ElFinder::ckeditorOptions($this->controller)
+            'editorOptions' => ElFinder::ckeditorOptions($this->controller, $this->editorOptions)
         ]);
     }
 
