@@ -38,7 +38,7 @@ class MultipleField extends BaseField implements Arrayable {
 
     const EXTRA_PREFIX = '__';
 
-    public function __construct($config)
+    public function __construct($config = [])
     {
         $config['type'] = $config['fieldtype'];
         if (isset($config['default']) && is_array($config['default'])) {
