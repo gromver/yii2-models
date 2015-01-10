@@ -22,7 +22,7 @@ class DynamicModel extends BaseModel {
     /**
      * @var \gromver\models\fields\BaseField[]
      */
-    private $_attributes;
+    private $_attributes = [];
     /**
      * @inheritdoc
      */
