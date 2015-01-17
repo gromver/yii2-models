@@ -33,3 +33,8 @@
 .grom-field-multiple-field > .form-group > label {
     display: none;
 }
+.grom-field-multiple-field > .form-group > label + .col-sm-6 {
+    padding: 0;
+    width: auto;
+    float: none;
+}
