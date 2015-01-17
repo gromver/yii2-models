@@ -98,6 +98,17 @@ class ObjectModel extends DynamicModel {
         return $event->formName;
     }
 
+    /**
+     * хелпер - для запуска функций принадлежащих self::sourceClass, используется статический контекст
+     * в качестве параметра в функцию передается модель
+     * @param $funcName string
+     * @return mixed
+     */
+    public function invoke($funcName)
+    {
+        return call_user_func([$this->_sourceClass, $funcName], $this);
+    }
+
     public function getSource()
     {
         return isset($this->_source) ? $this->_source : \Yii::createObject($this->_sourceClass);
@@ -159,17 +170,6 @@ class ObjectModel extends DynamicModel {
         }
 
         return $settings;
-    }
-
-    /**
-     * хелпер - для запуска функций принадлежащих self::sourceClass, используется статический контекст
-     * в качестве параметра в функцию передается модель
-     * @param $funcName string
-     * @return mixed
-     */
-    public function invoke($funcName)
-    {
-        return call_user_func([$this->_sourceClass, $funcName], $this);
     }
 
     public function attributeLabels()

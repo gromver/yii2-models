@@ -28,6 +28,8 @@ class Fields extends Widget
      */
     public $model;
     public $formOptions = [];
+    public $template = '{field}';
+    public $parts = [];
 
     public function init()
     {
@@ -40,13 +42,15 @@ class Fields extends Widget
     {
         $fields = $this->model->modelFields();
 
-       $form = ActiveForm::begin(ArrayHelper::merge([
-            'layout' => 'horizontal'
+        $form = ActiveForm::begin(ArrayHelper::merge([
+            'layout' => 'horizontal',
         ], $this->formOptions));
 
         /** @var $field \gromver\models\fields\BaseField */
         foreach ($fields as $field) {
-            echo $field->field($form, $form->fieldConfig);
+            $this->parts['{field}'] = $field->field($form, $form->fieldConfig);
+            echo strtr($this->template, $this->parts);
+            //echo $field->field($form, $form->fieldConfig);
         }
 
         ActiveForm::end();

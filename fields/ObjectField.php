@@ -95,11 +95,13 @@ class ObjectField extends BaseField
         $options = ArrayHelper::merge([
             'template' => "{before}\n{label}\n{beginWrapper}\n{error}\n{input}\n{endWrapper}\n{hint}\n{after}",
             'parts' => [
-                '{label}' => Html::tag('h2', Html::encode($this->getModel()->getAttributeLabel($this->getAttribute()))),
                 '{input}' => Fields::widget(['model' => $this->_value]),
             ],
             'wrapperOptions' => [
-                'class' => 'well'
+                'class' => 'well grom-field-object'
+            ],
+            'labelOptions' => [
+                'class' => 'h3'
             ]
         ], $options);
 

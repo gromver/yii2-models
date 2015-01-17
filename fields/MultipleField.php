@@ -96,7 +96,7 @@ class MultipleField extends BaseField implements Arrayable {
         return $this->toArray();
     }
 
-    //Arrayable interface
+    // Arrayable interface
     public function toArray(array $fields = [], array $expand = [], $recursive = true)
     {
         return $this->_value->toArray($fields, $expand, $recursive);
@@ -109,23 +109,18 @@ class MultipleField extends BaseField implements Arrayable {
      */
     public function field($form, $options = [])
     {
-        if ($this->fieldtype == 'object') {
-            $options = ArrayHelper::merge([
-                'template' => "{before}\n{label}\n{beginWrapper}\n{error}\n{input}\n{endWrapper}\n{hint}\n{after}",
-                'wrapperOptions' => [
-                    'class' => null
-                ],
-                'labelOptions' => [
-                    'class' => 'h2'
-                ]
-            ], $options);
-        } else {
-            $options = ArrayHelper::merge([
-                'template' => "{before}\n{label}\n{beginWrapper}\n{error}\n{input}\n{endWrapper}\n{hint}\n{after}"
-            ], $options);
-        }
-
-        $options['parts']['{input}'] = Html::tag('div', $this->renderEmptyText() . $this->renderFields() . $this->renderExtraFields(), ['class' => 'multyfield-container']);
+        $options = ArrayHelper::merge([
+            'template' => "{before}\n{label}\n{beginWrapper}\n{error}\n{input}\n{endWrapper}\n{hint}\n{after}",
+            'parts' => [
+                '{input}' => $this->renderEmptyText() . $this->renderFields() . $this->renderExtraFields() . $this->renderAppendButton(),
+            ],
+            'wrapperOptions' => [
+                'class' => 'grom-field-multiple-container'
+            ],
+            'labelOptions' => [
+                'class' => 'h3'
+            ]
+        ], $options);
 
         return parent::field($form, $options);
     }
@@ -138,19 +133,13 @@ class MultipleField extends BaseField implements Arrayable {
         return Fields::widget([
             'model' => $this->_value,
             'formOptions' => [
-                'fieldConfig'=>[
-                    'template' => "{before}\n{remove}\n{label}\n{beginWrapper}\n{input}\n{error}\n{endWrapper}\n{hint}\n{after}",
-                    'parts' => [
-                        '{label}' => '',
-                        '{remove}' => Html::button('&times;', ['class' => 'close multyfield-close-btn'])
-                    ],
-                    'wrapperOptions' => [
-                        'class' => 'col-sm-12' . ($this->fieldtype == 'object' ? ' well' : ' row')
-                    ]
-                ],
                 'options' => [
-                    'class' => 'multyfield-fields'
+                    'class' => 'grom-field-multiple-model-fields'
                 ]
+            ],
+            'template' => '<div class="grom-field-multiple-field">{field}{remove}</div>',
+            'parts' => [
+                '{remove}' => Html::button('&times;', ['class' => 'close grom-field-multiple-close-btn'])
             ]
         ]);
     }
@@ -178,24 +167,15 @@ class MultipleField extends BaseField implements Arrayable {
         return Fields::widget([
             'model' => $model,
             'formOptions' => [
-                'fieldConfig'=>[
-                    'template' => "{before}\n{remove}\n{label}\n{beginWrapper}\n{input}\n{error}\n{endWrapper}\n{hint}\n{after}",
-                    'parts' => [
-                        '{label}' => '',
-                        '{remove}' => Html::button('&times;', ['class' => 'close multyfield-close-btn'])
-                    ],
-                    'wrapperOptions' => [
-                        'class' => 'col-sm-12' . ($this->fieldtype == 'object' ? ' well' : ' row')
-                    ],
-                    'options' => [
-                        'class' => 'form-group hidden'
-                    ]
-                ],
                 'options' => [
-                    'class' => 'multyfield-extra-fields'
+                    'class' => 'grom-field-multiple-extra-fields'
                 ]
+            ],
+            'template' => '<div class="grom-field-multiple-field hidden">{field}{remove}</div>',
+            'parts' => [
+                '{remove}' => Html::button('&times;', ['class' => 'close grom-field-multiple-close-btn'])
             ]
-        ]) . $this->renderAppendButton();
+        ]);
     }
 
     /**
@@ -204,7 +184,7 @@ class MultipleField extends BaseField implements Arrayable {
     protected function renderAppendButton()
     {
         return Html::button('<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('gromver.models', 'Append') . '</span>', [
-            'class' => 'btn btn-info multyfield-append-btn'
+            'class' => 'btn btn-info grom-field-multiple-append-btn'
         ]);
     }
 
@@ -213,7 +193,7 @@ class MultipleField extends BaseField implements Arrayable {
      */
     protected function renderEmptyText()
     {
-        return Html::tag('div', $this->emptytext ? ($this->translation ? Yii::t($this->translation, $this->emptytext) : $this->emptytext) : '<em>' . Yii::t('gromver.models', 'Empty') . '</em>' . Html::hiddenInput(Html::getInputName($this->getModel(), $this->getAttribute())), ['class' => 'help-block multyfield-empty-text', 'style' => 'display: none;']);
+        return Html::tag('div', $this->emptytext ? ($this->translation ? Yii::t($this->translation, $this->emptytext) : $this->emptytext) : '<em>' . Yii::t('gromver.models', 'Empty') . '</em>' . Html::hiddenInput(Html::getInputName($this->getModel(), $this->getAttribute())), ['class' => 'help-block grom-field-multiple-empty-text', 'style' => 'display: none;']);
     }
 
     /**

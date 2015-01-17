@@ -171,6 +171,9 @@ abstract class BaseField extends Object implements Arrayable {
             ],
             'labelOptions' => [
                 'label' => $this->label()
+            ],
+            'wrapperOptions' => [
+                'class' => 'grom-field-base'
             ]
         ], $options);
 
