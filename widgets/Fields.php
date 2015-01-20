@@ -13,7 +13,6 @@ namespace gromver\models\widgets;
 use gromver\models\BaseModel;
 use gromver\models\ModelFormAsset;
 use yii\base\InvalidConfigException;
-use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -21,7 +20,7 @@ use yii\helpers\ArrayHelper;
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class Fields extends Widget
+class Fields extends \yii\base\Widget
 {
     /**
      * @var BaseModel

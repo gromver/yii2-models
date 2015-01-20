@@ -9,16 +9,18 @@
 
 namespace gromver\models\fields;
 
+
 use dosamigos\selectize\Selectize;
-use Yii;
 use yii\base\InvalidConfigException;
+use Yii;
 
 /**
  * Class ListField
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class ListField extends BaseField {
+class ListField extends BaseField
+{
     public $multiple;
     public $items;
     public $editable;

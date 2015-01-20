@@ -10,14 +10,13 @@
 namespace gromver\models;
 
 
-use yii\base\Event;
-
 /**
  * Class InvokeEvent
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class InvokeEvent extends Event {
+class InvokeEvent extends \yii\base\Event
+{
     public $funcName;
     public $result;
 } 

@@ -9,12 +9,14 @@
 
 namespace gromver\models\fields;
 
+
 /**
  * Class TextField
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class TextField extends BaseField {
+class TextField extends BaseField
+{
     public $default;
     public $hint;
     public $required;

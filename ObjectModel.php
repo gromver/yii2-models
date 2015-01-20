@@ -21,7 +21,8 @@ use yii\helpers\StringHelper;
  *
  * Моделька основанная на публичных полях данного объекта
  */
-class ObjectModel extends DynamicModel {
+class ObjectModel extends DynamicModel
+{
     private static $_specifications = [];
     private static $_callStack = [];
     private static $_callContext = [];

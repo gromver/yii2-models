@@ -9,6 +9,7 @@
 
 namespace gromver\models\fields;
 
+
 use gromver\models\ArrayModel;
 use gromver\models\BaseModel;
 use gromver\models\validators\MultipleValidator;
@@ -26,7 +27,8 @@ use yii\helpers\Html;
  *
  * @property ArrayModel $_value
  */
-class MultipleField extends BaseField implements Arrayable {
+class MultipleField extends BaseField implements Arrayable
+{
     use ArrayableTrait;
 
     private $_fieldConfig;

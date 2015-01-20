@@ -9,7 +9,7 @@
 
 namespace gromver\models\validators;
 
-use yii\validators\Validator;
+
 use Yii;
 
 /**
@@ -17,7 +17,8 @@ use Yii;
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class ObjectValidator extends Validator {
+class ObjectValidator extends \yii\validators\Validator
+{
     public $message;
     /**
      * @var \gromver\models\ObjectModel

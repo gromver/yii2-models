@@ -9,14 +9,14 @@
 
 namespace gromver\models;
 
-use yii\web\AssetBundle;
 
 /**
  * Class ModelFormAsset
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class ModelFormAsset extends AssetBundle {
+class ModelFormAsset extends \yii\web\AssetBundle
+{
     public $sourcePath = '@gromver/models/assets';
 
     public $js = [

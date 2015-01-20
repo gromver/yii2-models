@@ -9,7 +9,7 @@
 
 namespace gromver\models\validators;
 
-use yii\validators\Validator;
+
 use Yii;
 
 /**
@@ -17,7 +17,8 @@ use Yii;
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class MultipleValidator extends Validator {
+class MultipleValidator extends \yii\validators\Validator
+{
     /**
      * @var \gromver\models\ArrayModel
      */

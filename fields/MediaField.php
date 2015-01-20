@@ -9,6 +9,7 @@
 
 namespace gromver\models\fields;
 
+
 use mihaildev\elfinder\InputFile;
 use Yii;
 
@@ -17,7 +18,8 @@ use Yii;
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class MediaField extends BaseField {
+class MediaField extends BaseField
+{
     public $default;
     public $required;
     public $controller;

@@ -9,14 +9,12 @@
 
 namespace gromver\models;
 
-use yii\base\Model;
-
 /**
  * Class BaseModel
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-abstract class BaseModel extends Model
+abstract class BaseModel extends \yii\base\Model
 {
     const EVENT_FORM_NAME = 'formName';
     const EVENT_INVOKE = 'invoke';

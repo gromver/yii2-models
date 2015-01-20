@@ -8,6 +8,8 @@
  */
 
 namespace gromver\models\fields;
+
+
 use mihaildev\ckeditor\CKEditor;
 use mihaildev\elfinder\ElFinder;
 
@@ -16,7 +18,8 @@ use mihaildev\elfinder\ElFinder;
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class EditorField extends BaseField {
+class EditorField extends BaseField
+{
     public $default;
     public $required;
     public $controller;

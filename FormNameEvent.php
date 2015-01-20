@@ -10,13 +10,12 @@
 namespace gromver\models;
 
 
-use yii\base\Event;
-
 /**
  * Class FormNameEvent
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class FormNameEvent extends Event {
+class FormNameEvent extends \yii\base\Event
+{
     public $formName;
 } 

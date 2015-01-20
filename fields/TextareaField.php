@@ -9,12 +9,14 @@
 
 namespace gromver\models\fields;
 
+
 /**
  * Class TextareaField
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class TextareaField extends TextField {
+class TextareaField extends TextField
+{
     public function field($form, $options = [])
     {
         return parent::field($form, $options)->textarea();

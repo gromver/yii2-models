@@ -9,12 +9,12 @@
 
 namespace gromver\models\fields;
 
+
 use gromver\models\BaseModel;
 use Yii;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
 use yii\base\InvalidParamException;
-use yii\base\Object;
 use yii\base\UnknownPropertyException;
 use yii\bootstrap\BootstrapPluginAsset;
 use yii\helpers\ArrayHelper;
@@ -29,7 +29,8 @@ use yii\helpers\Html;
  * @property string $attribute
  * @property mixed $value
  */
-abstract class BaseField extends Object implements Arrayable {
+abstract class BaseField extends \yii\base\Object implements Arrayable
+{
     use ArrayableTrait;
 
     public $type;

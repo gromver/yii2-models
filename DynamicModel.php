@@ -18,7 +18,8 @@ use gromver\models\fields\BaseField;
  *
  * Динамическая моделька основанная на умных полях
  */
-class DynamicModel extends BaseModel {
+class DynamicModel extends BaseModel
+{
     /**
      * @var \gromver\models\fields\BaseField[]
      */

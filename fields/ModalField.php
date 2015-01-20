@@ -9,6 +9,7 @@
 
 namespace gromver\models\fields;
 
+
 use gromver\widgets\ModalIFrame;
 use yii\bootstrap\Modal;
 use yii\helpers\ArrayHelper;
@@ -19,7 +20,8 @@ use yii\helpers\Html;
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class ModalField extends BaseField {
+class ModalField extends BaseField
+{
     public $default;
     public $required;
     public $url;

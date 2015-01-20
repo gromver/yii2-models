@@ -9,6 +9,7 @@
 
 namespace gromver\models\fields;
 
+
 use kartik\widgets\DateTimePicker;
 use yii\base\InvalidConfigException;
 use Yii;
@@ -18,7 +19,8 @@ use Yii;
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class DateTimeField extends BaseField {
+class DateTimeField extends BaseField
+{
     public $default;
     public $required;
     public $format;

@@ -15,7 +15,8 @@ use yii\helpers\Html;
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class ActiveForm extends \yii\bootstrap\ActiveForm {
+class ActiveForm extends \yii\bootstrap\ActiveForm
+{
     public function init()
     {
         ob_start();

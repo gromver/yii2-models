@@ -14,6 +14,7 @@ namespace gromver\models;
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-interface SpecificationInterface {
+interface SpecificationInterface
+{
     public function processSpecification(&$specification);
 } 
