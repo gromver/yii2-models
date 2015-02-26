@@ -61,7 +61,7 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
         'select' => 'gromver\models\fields\SelectField',
         'object' => 'gromver\models\fields\ObjectField',
         'multiple' => 'gromver\models\fields\MultipleField',
-        'yesno' => ['class' => 'gromver\models\fields\ListField', 'items' => ['Нет', 'Да']],
+        'yesno' => ['class' => 'gromver\models\fields\ListField', 'items' => 'gromver\models\fields\BaseField::yesnoItems'],
         'datetime' => 'gromver\models\fields\DateTimeField',
         'modal' => 'gromver\models\fields\ModalField',
         'media' => 'gromver\models\fields\MediaField',
@@ -237,5 +237,13 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
     public function toArray(array $fields = [], array $expand = [], $recursive = true)
     {
         return $this->_value;
+    }
+
+    static public function yesnoItems()
+    {
+        return [
+            Yii::t('gromver.platform', 'No'),
+            Yii::t('gromver.platform', 'Yes'),
+        ];
     }
 }

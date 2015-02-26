@@ -77,7 +77,7 @@ class ObjectModel extends DynamicModel
             $this->defineAttribute($attribute, $settings);
 
             //если в качестве структуры дан обьект, то инициализируем модель значениями объекта
-            if (isset($this->_source)) {
+            if (isset($this->_source) && isset($this->_source->{$attribute})) {
                 $this->{$attribute} = $this->_source->{$attribute};
             }
         }
