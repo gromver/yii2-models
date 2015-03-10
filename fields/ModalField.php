@@ -56,30 +56,18 @@ class ModalField extends BaseField
 
     protected function modalButton()
     {
-        ob_start();
-        ob_implicit_flush(false);
-
         $inputId = Html::getInputId($this->getModel(), $this->getAttribute());
 
-        ModalIFrame::begin([
-            'buttonOptions' => [
-                'tag' => 'span',
+        return ModalIFrame::widget([
+            'options' => [
                 'class' => 'input-group-btn'
             ],
-            'modalOptions' => [
-                'size' => Modal::SIZE_LARGE,
-                'closeButton' => false
-            ],
-            'iframeHandler' => "function(data){
+            'label' => Html::tag('span', '<i class="glyphicon glyphicon-folder-open"></i>', ['class'=>'btn btn-default']),
+            'url' => $this->url,
+            'handler' => "function(data){
                     $('#{$inputId}').val(data.value)
                 }"
         ]);
-
-        echo Html::a('<span class="glyphicon glyphicon-folder-open"></span>', $this->url, ['class'=>'btn btn-default']);
-
-        ModalIFrame::end();
-
-        return ob_get_clean();
     }
 
     /**
