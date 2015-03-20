@@ -10,7 +10,7 @@
 namespace gromver\models\fields;
 
 
-use dosamigos\selectize\Selectize;
+use dosamigos\selectize\SelectizeDropDownList;
 use yii\base\InvalidConfigException;
 use Yii;
 
@@ -46,7 +46,7 @@ class ListField extends BaseField
      */
     public function field($form, $options = [])
     {
-        return parent::field($form, $options)->widget(Selectize::className(), [
+        return parent::field($form, $options)->widget(SelectizeDropDownList::className(), [
             'items' => $this->fetchItems(),
             'options' => [
                 'disabled' => isset($this->disabled) ? 'disabled' : null,
