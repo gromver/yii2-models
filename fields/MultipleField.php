@@ -34,7 +34,7 @@ class MultipleField extends BaseField implements Arrayable
     private $_fieldConfig;
 
     public $required;
-    public $fieldtype;
+    public $multyfield;
     public $extra = 5;
     public $emptytext;
 
@@ -42,7 +42,7 @@ class MultipleField extends BaseField implements Arrayable
 
     public function __construct($config = [])
     {
-        $config['type'] = $config['fieldtype'];
+        $config['field'] = $config['multyfield'];
         if (isset($config['default']) && is_array($config['default'])) {
             unset($config['default']);
         }

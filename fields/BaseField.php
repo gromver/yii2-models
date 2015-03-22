@@ -33,7 +33,7 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
 {
     use ArrayableTrait;
 
-    public $type;
+    public $field;
     public $disabled;
     public $before;
     public $after;
@@ -92,14 +92,14 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
             //если в конфиге не указан клас поля, то определяем его по типу
             if (!isset($config['class'])) {
                 //если не указан тип то используется по умолчанию 'text'
-                $type = ArrayHelper::remove($config, 'type', 'text');
-                $typeConfig = self::$builtInFields[$type];
-                if (is_array($typeConfig)) {
+                $field = ArrayHelper::remove($config, 'field', 'text');
+                $fieldConfig = self::$builtInFields[$field];
+                if (is_array($fieldConfig)) {
                     //если конфигурация типа задана массивом то мерджим с текущей конфигурацией
-                    $config = array_merge($typeConfig, $config);
+                    $config = array_merge($fieldConfig, $config);
                 } else {
                     //если строка то подставляем ее в качестве имени класса в конфигурацию
-                    $config['class'] = $typeConfig;
+                    $config['class'] = $fieldConfig;
                 }
             }
             $instance = Yii::createObject($config);
