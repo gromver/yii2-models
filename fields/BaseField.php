@@ -40,6 +40,7 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
     public $label;
     public $hint;
     public $translation;
+    public $access;
 
     /**
      * @var mixed
@@ -68,7 +69,10 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
         'editor' => 'gromver\models\fields\EditorField'
     ];
 
-
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
     public function __set($name, $value)
     {
         try {

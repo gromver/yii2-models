@@ -54,9 +54,21 @@ abstract class BaseModel extends \yii\base\Model
     {
         $attributes = [];
 
-        foreach($this->modelFields() as $attribute => $field)
+        foreach ($this->modelFields() as $attribute => $field)
         {
-            if(!isset($field->disabled)) $attributes[] = $attribute;
+            /** @var $field \gromver\models\fields\BaseField */
+            if (isset($field->disabled))
+                continue;
+
+            if (isset($field->access)) {
+                $rules = preg_split('/\s+/', $field->access, -1, PREG_SPLIT_NO_EMPTY);
+                foreach ($rules as $rule) {
+                    if (!\Yii::$app->user->can($rule))
+                        continue 2;
+                }
+            }
+
+            $attributes[] = $attribute;
         }
 
         return [self::SCENARIO_DEFAULT => $attributes];
