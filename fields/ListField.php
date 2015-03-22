@@ -86,4 +86,12 @@ class ListField extends BaseField
             return $this->getModel()->invoke($callable);
         }
     }
+
+    static public function itemsYesno()
+    {
+        return [
+            Yii::t('gromver.platform', 'No'),
+            Yii::t('gromver.platform', 'Yes'),
+        ];
+    }
 }
