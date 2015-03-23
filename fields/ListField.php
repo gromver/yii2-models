@@ -28,6 +28,17 @@ class ListField extends BaseField
     public $required;
     public $empty;
 
+    /**
+     * TODO
+     * [
+     *      'some\class\name' => [
+     *          'fieldname' => [..additional items..]
+     *      ]
+     * ]
+     * @var array
+     */
+    private static $_items = [];
+
     public function init()
     {
         if (isset($this->default)) {
@@ -93,5 +104,16 @@ class ListField extends BaseField
             Yii::t('gromver.platform', 'No'),
             Yii::t('gromver.platform', 'Yes'),
         ];
+    }
+
+    /**
+     * TODO
+     * @param $class string
+     * @param $attribute string
+     * @param $items array
+     */
+    static public function setAdditionalItems($class, $attribute, $items)
+    {
+        self::$_items[$class][$attribute] = $items;
     }
 }

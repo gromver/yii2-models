@@ -9,7 +9,6 @@
 
 namespace gromver\models;
 
-
 /**
  * Class FormNameEvent
  * @package yii2-models
