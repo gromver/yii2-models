@@ -12,6 +12,7 @@ namespace gromver\models\fields;
 
 use gromver\models\ArrayModel;
 use gromver\models\BaseModel;
+use gromver\models\ObjectModel;
 use gromver\models\validators\MultipleValidator;
 use gromver\models\widgets\Fields;
 use Yii;
@@ -26,6 +27,7 @@ use yii\helpers\Html;
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property ArrayModel $_value
+ * @property ObjectModel $model
  */
 class MultipleField extends BaseField implements Arrayable
 {
@@ -52,13 +54,18 @@ class MultipleField extends BaseField implements Arrayable
         parent::__construct($config);
     }
 
-    public function init()
+    /**
+     * @inheritdoc
+     */
+    public function link(BaseModel $model, $attribute)
     {
-        $this->_value = new ArrayModel($this->_fieldConfig);
+        parent::link($model, $attribute);
+
+        $this->_value = new ArrayModel($this->model, $this->_fieldConfig);
         $this->_value->on(BaseModel::EVENT_FORM_NAME, [$this, 'formName']);
         $this->_value->on(BaseModel::EVENT_INVOKE, [$this, 'invoke']);
 
-        parent::init();
+        return $this;
     }
 
     /**
@@ -155,7 +162,7 @@ class MultipleField extends BaseField implements Arrayable
             return '';
         }
 
-        $model = new ArrayModel($this->_fieldConfig);
+        $model = new ArrayModel($this->model, $this->_fieldConfig);
         $model->on(BaseModel::EVENT_FORM_NAME, [$this, 'prefixedFormName']);
         $model->on(BaseModel::EVENT_INVOKE, [$this, 'invoke']);
 

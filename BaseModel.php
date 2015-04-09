@@ -75,8 +75,11 @@ abstract class BaseModel extends \yii\base\Model
         return [self::SCENARIO_DEFAULT => $attributes];
     }
 
+    /**
+     * @return array
+     */
     public function modelFields()
     {
         return [];
     }
-} 
+}

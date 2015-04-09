@@ -11,6 +11,9 @@ namespace gromver\models\fields;
 
 
 use dosamigos\selectize\SelectizeDropDownList;
+use gromver\models\fields\events\ListItemEvent;
+use gromver\models\ObjectModelInterface;
+use yii\base\Event;
 use yii\base\InvalidConfigException;
 use Yii;
 
@@ -21,23 +24,14 @@ use Yii;
  */
 class ListField extends BaseField
 {
+    const EVENT_FETCH_ITEMS = 'fetchItems';
+
     public $multiple;
     public $items;
     public $editable;
     public $default;
     public $required;
     public $empty;
-
-    /**
-     * TODO
-     * [
-     *      'some\class\name' => [
-     *          'fieldname' => [..additional items..]
-     *      ]
-     * ]
-     * @var array
-     */
-    private static $_items = [];
 
     public function init()
     {
@@ -82,6 +76,16 @@ class ListField extends BaseField
             $items[$value] = $value;
         }
 
+        if ($this->getModel() instanceof ObjectModelInterface) {
+            $event = new ListItemEvent([
+                'items' => $items,
+                'model' => $this->getModel()->getObjectModel()
+            ]);
+            Event::trigger(static::className(), self::EVENT_FETCH_ITEMS, $event);
+
+            return $event->items;
+        }
+
         return $items;
     }
 
@@ -104,16 +108,5 @@ class ListField extends BaseField
             Yii::t('gromver.platform', 'No'),
             Yii::t('gromver.platform', 'Yes'),
         ];
-    }
-
-    /**
-     * TODO
-     * @param $class string
-     * @param $attribute string
-     * @param $items array
-     */
-    static public function setAdditionalItems($class, $attribute, $items)
-    {
-        self::$_items[$class][$attribute] = $items;
     }
 }

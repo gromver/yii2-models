@@ -47,7 +47,8 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
      */
     protected $_value;
     /**
-     * @var \gromver\models\BaseModel
+     * Модель которая использует данное поле
+     * @var BaseModel
      */
     private $_model;
     /**
@@ -207,7 +208,7 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
     }
 
     /**
-     * @return \gromver\models\ObjectModel
+     * @return BaseModel
      */
     public function getModel()
     {

@@ -16,11 +16,11 @@ use yii\base\Object;
 use yii\validators\Validator;
 
 /**
- * Class MultipleFieldModel
+ * Class ArrayModel
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class ArrayModel extends BaseModel implements \Countable
+class ArrayModel extends BaseModel implements \Countable, ObjectModelInterface
 {
     use ArrayAccessTrait;
     /**
@@ -31,15 +31,22 @@ class ArrayModel extends BaseModel implements \Countable
      * @var \gromver\models\fields\BaseField[]
      */
     private $data = [];
+    /**
+     * Данная модель работает в связке с ObjectModel
+     * @var ObjectModel
+     */
+    private $_objectModel;
 
     /**
+     * @param ObjectModel
      * @param array $fieldConfig
      * @param array $config
      * @internal param object|string $object
      * @internal param array $attributes
      */
-    public function __construct(array $fieldConfig, $config = [])
+    public function __construct(ObjectModel $model, array $fieldConfig, $config = [])
     {
+        $this->_objectModel = $model;
         $this->_fieldConfig = $fieldConfig;
 
         Object::__construct($config);
@@ -185,5 +192,14 @@ class ArrayModel extends BaseModel implements \Countable
                 $this->addRule((string)$rule[0], $rule[1], array_slice($rule, 2));
             }
         }
+    }
+
+    // ObjectModelInterface
+    /**
+     * @inheritdoc
+     */
+    public function getObjectModel()
+    {
+        return $this->_objectModel;
     }
 }

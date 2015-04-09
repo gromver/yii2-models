@@ -22,7 +22,7 @@ use yii\helpers\StringHelper;
  *
  * Моделька основанная на публичных полях данного объекта
  */
-class ObjectModel extends DynamicModel
+class ObjectModel extends DynamicModel implements ObjectModelInterface
 {
     private static $_specifications = [];
     private static $_callStack = [];
@@ -52,6 +52,9 @@ class ObjectModel extends DynamicModel
         Object::__construct($config);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         //Проверка на зацикленность полей модели
@@ -91,6 +94,9 @@ class ObjectModel extends DynamicModel
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public function formName()
     {
         $event = new FormNameEvent(['formName' => StringHelper::basename($this->_sourceClass)]);
@@ -111,16 +117,27 @@ class ObjectModel extends DynamicModel
         return call_user_func([$this->_sourceClass, $funcName], $this);
     }
 
+    /**
+     * @return object|string
+     * @throws InvalidConfigException
+     */
     public function getSource()
     {
         return isset($this->_source) ? $this->_source : \Yii::createObject($this->_sourceClass);
     }
 
+    /**
+     * @return string
+     */
     public function getSourceClass()
     {
         return $this->_sourceClass;
     }
 
+    /**
+     * @param $className
+     * @return mixed
+     */
     public static function getClassSpecification($className)
     {
         if(!isset(self::$_specifications[$className]))
@@ -174,11 +191,23 @@ class ObjectModel extends DynamicModel
         return $settings;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return array_map(function($field) {
             /** @var $field \gromver\models\fields\BaseField */
             return $field->label ? $field->label : $this->generateAttributeLabel($field->attribute);
         }, $this->modelFields());
+    }
+
+    // ObjectModelInterface
+    /**
+     * @inheritdoc
+     */
+    public function getObjectModel()
+    {
+        return $this;
     }
 }
