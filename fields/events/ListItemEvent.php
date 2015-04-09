@@ -25,4 +25,8 @@ class ListItemEvent extends \yii\base\Event {
      * @var \gromver\models\ObjectModel
      */
     public $model;
+    /**
+     * @var string
+     */
+    public $attribute;
 } 

@@ -56,6 +56,10 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
      */
     private $_attribute;
 
+    /**
+     * @var array
+     * Предустановленные типы полей, можно добавить свои
+     */
     public static $builtInFields = [
         'text' => 'gromver\models\fields\TextField',
         'textarea' => 'gromver\models\fields\TextareaField',

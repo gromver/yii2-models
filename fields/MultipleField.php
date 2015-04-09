@@ -63,7 +63,6 @@ class MultipleField extends BaseField implements Arrayable
 
         $this->_value = new ArrayModel($this->model, $this->_fieldConfig);
         $this->_value->on(BaseModel::EVENT_FORM_NAME, [$this, 'formName']);
-        $this->_value->on(BaseModel::EVENT_INVOKE, [$this, 'invoke']);
 
         return $this;
     }
@@ -85,13 +84,8 @@ class MultipleField extends BaseField implements Arrayable
     }
 
     /**
-     * @param $event \gromver\models\InvokeEvent
+     * @inheritdoc
      */
-    public function invoke($event)
-    {
-        $event->result = $this->model->invoke($event->funcName);
-    }
-
     public function setValue($values)
     {
         // если $values имеет пустой значение, то принимаем его за пустой массив, в противном случае кастуем значение в массив
@@ -100,12 +94,18 @@ class MultipleField extends BaseField implements Arrayable
         return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getValue()
     {
         return $this->toArray();
     }
 
     // Arrayable interface
+    /**
+     * @inheritdoc
+     */
     public function toArray(array $fields = [], array $expand = [], $recursive = true)
     {
         return $this->_value->toArray($fields, $expand, $recursive);
@@ -164,7 +164,7 @@ class MultipleField extends BaseField implements Arrayable
 
         $model = new ArrayModel($this->model, $this->_fieldConfig);
         $model->on(BaseModel::EVENT_FORM_NAME, [$this, 'prefixedFormName']);
-        $model->on(BaseModel::EVENT_INVOKE, [$this, 'invoke']);
+        //$model->on(BaseModel::EVENT_INVOKE, [$this, 'invoke']);
 
         $extra = $this->extra;
         $index = count($this->_value);

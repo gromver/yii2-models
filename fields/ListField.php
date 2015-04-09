@@ -16,6 +16,7 @@ use gromver\models\ObjectModelInterface;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 use Yii;
+use yii\helpers\Html;
 
 /**
  * Class ListField
@@ -77,10 +78,14 @@ class ListField extends BaseField
         }
 
         if ($this->getModel() instanceof ObjectModelInterface) {
+            preg_match_all('/\[([a-zA-Z]\w*)\]/', Html::getInputName($this->getModel(), $this->getAttribute()), $matches);
+
             $event = new ListItemEvent([
                 'items' => $items,
-                'model' => $this->getModel()->getObjectModel()
+                'model' => $this->getModel()->getObjectModel(),
+                'attribute' => end($matches[1])
             ]);
+
             Event::trigger(static::className(), self::EVENT_FETCH_ITEMS, $event);
 
             return $event->items;
@@ -91,14 +96,19 @@ class ListField extends BaseField
 
     /**
      * @param string $callable
-     * @return mixed
+     * @throws InvalidConfigException
+     * @return array
      */
     public function invoke($callable)
     {
         if(strpos($callable, '::')) {
             return call_user_func($callable, $this);
         } else {
-            return $this->getModel()->invoke($callable);
+            if ($this->getModel() instanceof ObjectModelInterface) {
+                return $this->getModel()->getObjectModel()->invoke($callable);
+            } else {
+                throw new InvalidConfigException('Unable to fetch items.');
+            }
         }
     }
 

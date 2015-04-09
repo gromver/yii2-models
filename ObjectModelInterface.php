@@ -11,6 +11,7 @@ namespace gromver\models;
 
 /**
  * Interface ObjectModelInterface
+ * Для моделей основанных на объекте
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  */
