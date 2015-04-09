@@ -11,7 +11,7 @@ namespace gromver\models\fields;
 
 
 use dosamigos\selectize\SelectizeDropDownList;
-use gromver\models\fields\events\ListItemEvent;
+use gromver\models\fields\events\ListItemsEvent;
 use gromver\models\ObjectModelInterface;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
@@ -80,7 +80,7 @@ class ListField extends BaseField
         if ($this->getModel() instanceof ObjectModelInterface) {
             preg_match_all('/\[([a-zA-Z]\w*)\]/', Html::getInputName($this->getModel(), $this->getAttribute()), $matches);
 
-            $event = new ListItemEvent([
+            $event = new ListItemsEvent([
                 'items' => $items,
                 'model' => $this->getModel()->getObjectModel(),
                 'attribute' => end($matches[1])

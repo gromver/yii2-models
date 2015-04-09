@@ -10,13 +10,13 @@
 namespace gromver\models\fields\events;
 
 /**
- * Class ListItemEvent
+ * Class ListItemsEvent
  * @package yii2-models
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property $sender \gromver\models\fields\ListField
  */
-class ListItemEvent extends \yii\base\Event {
+class ListItemsEvent extends \yii\base\Event {
     /**
      * @var array fo list items
      */
