@@ -120,7 +120,7 @@ class MultipleField extends BaseField implements Arrayable
                 'class' => 'grom-field-multiple-container'
             ],
             'labelOptions' => [
-                'class' => 'h3'
+                'class' => 'control-label'
             ]
         ], $options);
 
