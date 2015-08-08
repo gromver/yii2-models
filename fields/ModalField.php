@@ -64,7 +64,7 @@ class ModalField extends BaseField
             ],
             'label' => Html::tag('span', '<i class="glyphicon glyphicon-folder-open"></i>', ['class'=>'btn btn-default']),
             'url' => $this->url,
-            'handler' => "function(data){
+            'dataHandler' => "function(data){
                     $('#{$inputId}').val(data.value)
                 }"
         ]);
