@@ -14,8 +14,7 @@
     "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "*",
-        "kartik-v/yii2-widgets": "dev-master",
-        "2amigos/yii2-selectize-widget" : "*"
+        "kartik-v/yii2-widgets": "dev-master"
     },
     "autoload": {
         "psr-4": {

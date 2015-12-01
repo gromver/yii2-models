@@ -10,9 +10,9 @@
 namespace gromver\models\fields;
 
 
-use dosamigos\selectize\SelectizeDropDownList;
 use gromver\models\fields\events\ListItemsEvent;
 use gromver\models\ObjectModelInterface;
+use kartik\select2\Select2;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 use Yii;
@@ -52,13 +52,14 @@ class ListField extends BaseField
      */
     public function field($form, $options = [])
     {
-        return parent::field($form, $options)->widget(SelectizeDropDownList::className(), [
-            'items' => $this->fetchItems(),
+        return parent::field($form, $options)->widget(Select2::className(), [
+            'data' => $this->fetchItems(),
+            'theme' => Select2::THEME_BOOTSTRAP,
             'options' => [
                 'disabled' => isset($this->disabled) ? 'disabled' : null,
                 'multiple' => isset($this->multiple) ? 'multiple' : null,
             ],
-            'clientOptions' => [
+            'pluginOptions' => [
                 'create' => isset($this->editable),
                 'maxItems' => isset($this->multiple) ? 'NaN' : 1,
             ]
