@@ -16,6 +16,7 @@ use kartik\select2\Select2;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /**
@@ -71,7 +72,7 @@ class ListField extends BaseField
         $items = is_array($this->items) ? $this->items : $this->invoke($this->items);
 
         if (isset($this->empty)) {
-            $items = array_merge(['' => empty($this->empty) ? Yii::t('gromver.models', 'Select...') : $this->empty], $items);
+            $items = ArrayHelper::merge(['' => empty($this->empty) ? Yii::t('gromver.models', 'Select...') : $this->empty], $items);
         }
 
         if (isset($this->editable) && !isset($this->multiple) && ($value = $this->getValue()) && !array_key_exists($value, $items)) {
