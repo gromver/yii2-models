@@ -37,6 +37,8 @@ class ListField extends BaseField
 
     public function init()
     {
+        parent::init();
+
         if (isset($this->default)) {
             $this->setValue($this->default);
         }
@@ -117,8 +119,8 @@ class ListField extends BaseField
     static public function itemsYesno()
     {
         return [
-            Yii::t('gromver.platform', 'No'),
-            Yii::t('gromver.platform', 'Yes'),
+            Yii::t('gromver.models', 'No'),
+            Yii::t('gromver.models', 'Yes'),
         ];
     }
 }

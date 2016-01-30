@@ -29,6 +29,8 @@ class TextField extends BaseField
 
     public function init()
     {
+        parent::init();
+
         if(isset($this->default))
             $this->setValue($this->default);
     }

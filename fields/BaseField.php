@@ -74,6 +74,15 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
         'editor' => 'gromver\models\fields\EditorField'
     ];
 
+    public function init()
+    {
+        isset(Yii::$app->i18n->translations["gromver.models"]) or Yii::$app->i18n->translations["gromver.models"] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => "@gromver/models/messages",
+            //'forceTranslation' => true
+        ];
+    }
+
     /**
      * @param string $name
      * @param mixed $value

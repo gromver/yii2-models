@@ -32,6 +32,8 @@ class ObjectField extends BaseField
 
     public function init()
     {
+        parent::init();
+
         if (!isset($this->object)) {
             throw new InvalidConfigException(Yii::t('gromver.models', __CLASS__ . '::object must be set for {attribute} attribute', ['attribute' => $this->getAttribute()]));
         }

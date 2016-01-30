@@ -27,6 +27,8 @@ class MediaField extends BaseField
 
     public function init()
     {
+        parent::init();
+
         if (isset($this->default)) {
             $this->setValue($this->default);
         }
@@ -46,6 +48,7 @@ class MediaField extends BaseField
             'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
             'options'       => ['class' => 'form-control'],
             'buttonOptions' => ['class' => 'btn btn-default'],
+            'buttonName'    => Yii::t('gromver.models', 'Browse'),
             'multiple'      => false       // возможность выбора нескольких файлов
         ]);
     }
