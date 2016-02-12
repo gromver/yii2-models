@@ -119,44 +119,48 @@ class MultipleField extends BaseField implements Arrayable
     public function field($form, $options = [])
     {
         $options = ArrayHelper::merge([
-            'template' => "{before}\n{label}\n{beginWrapper}\n{error}\n{input}\n{endWrapper}\n{hint}\n{after}",
+            'template' => "{before}\n<div class=\"grom-field-multiple-label clearfix\">{label}</div>\n{beginWrapper}\n{error}\n{input}\n{endWrapper}\n{hint}\n{after}",
             'parts' => [
-                '{input}' => $this->renderEmptyText() . $this->renderFields() . $this->renderExtraFields() . $this->renderAppendButton(),
+                '{input}' => $this->renderEmptyText() . $this->renderFields($form) . $this->renderExtraFields($form) . $this->renderAppendButton(),
             ],
             'wrapperOptions' => [
-                'class' => 'grom-field-multiple-container'
+                'class' => 'grom-field-multiple-container clearfix'
             ],
-            'labelOptions' => [
+            /*'labelOptions' => [
                 'class' => 'control-label'
-            ]
+            ]*/
         ], $options);
 
         return parent::field($form, $options);
     }
 
     /**
+     * @param Yii\widgets\ActiveForm $form
      * @return string
      */
-    protected function renderFields()
+    protected function renderFields($form)
     {
-        return Fields::widget([
-            'model' => $this->_value,
-            'formOptions' => [
-                'options' => [
-                    'class' => 'grom-field-multiple-model-fields'
-                ]
-            ],
-            'template' => '<div class="grom-field-multiple-field">{field}{remove}</div>',
-            'parts' => [
-                '{remove}' => Html::button('&times;', ['class' => 'close grom-field-multiple-close-btn'])
-            ]
-        ]);
+        $fields = $this->_value->modelFields();
+        $html = '';
+
+        /** @var $field \gromver\models\fields\BaseField */
+        foreach ($fields as $field) {
+            $html .= strtr('<div class="grom-field-multiple-field">{remove}{down}{up}{field}</div>', [
+                '{field}' => $field->field($form),
+                '{up}' => Html::button('<i class="glyphicon glyphicon-chevron-up"></i>', ['class' => 'grom-field-multiple-up-btn']),
+                '{down}' => Html::button('<i class="glyphicon glyphicon-chevron-down"></i>', ['class' => 'grom-field-multiple-down-btn']),
+                '{remove}' => Html::button('<i class="glyphicon glyphicon-remove"></i>', ['class' => 'grom-field-multiple-close-btn'])
+            ]);
+        }
+
+        return $html;
     }
 
     /**
+     * @param Yii\widgets\ActiveForm $form
      * @return string
      */
-    protected function renderExtraFields()
+    protected function renderExtraFields($form)
     {
         if ($this->extra <= 0) {
             return '';
@@ -164,7 +168,6 @@ class MultipleField extends BaseField implements Arrayable
 
         $model = new ArrayModel($this->model, $this->_fieldConfig);
         $model->on(BaseModel::EVENT_FORM_NAME, [$this, 'prefixedFormName']);
-        //$model->on(BaseModel::EVENT_INVOKE, [$this, 'invoke']);
 
         $extra = $this->extra;
         $index = count($this->_value);
@@ -173,18 +176,20 @@ class MultipleField extends BaseField implements Arrayable
             $model[$index++] = null;
         }
 
-        return Fields::widget([
-            'model' => $model,
-            'formOptions' => [
-                'options' => [
-                    'class' => 'grom-field-multiple-extra-fields'
-                ]
-            ],
-            'template' => '<div class="grom-field-multiple-field hidden">{field}{remove}</div>',
-            'parts' => [
-                '{remove}' => Html::button('&times;', ['class' => 'close grom-field-multiple-close-btn'])
-            ]
-        ]);
+        $fields = $model->modelFields();
+        $html = '';
+
+        /** @var $field \gromver\models\fields\BaseField */
+        foreach ($fields as $field) {
+            $html .= strtr('<div class="grom-field-multiple-field grom-field-multiple-field_extra">{remove}{down}{up}{field}</div>', [
+                '{field}' => $field->field($form),
+                '{up}' => Html::button('<i class="glyphicon glyphicon-chevron-up"></i>', ['class' => 'grom-field-multiple-up-btn']),
+                '{down}' => Html::button('<i class="glyphicon glyphicon-chevron-down"></i>', ['class' => 'grom-field-multiple-down-btn']),
+                '{remove}' => Html::button('<i class="glyphicon glyphicon-remove"></i>', ['class' => 'grom-field-multiple-close-btn'])
+            ]);
+        }
+
+        return $html;
     }
 
     /**

@@ -1,14 +1,14 @@
 yii.gromMultipleField = (function ($) {
     function append(container) {
-        $(container).find("> .grom-field-multiple-extra-fields > .grom-field-multiple-field.hidden:first").removeClass("hidden").addClass("show").find("[name]:input").attr("name", function (i, val) {
+        $(container).find("> .grom-field-multiple-field_extra:first").removeClass("grom-field-multiple-field_extra").find("[name]:input").attr("name", function (i, val) {
             return val.replace(/^__/, "");
         });
     }
 
     function normalize(container) {
         var $container = $(container);
-        $container.find("> .grom-field-multiple-empty-text")[$container.find("> div > .grom-field-multiple-field:visible")[0] ? "hide" : "show"]();
-        if (!$container.find("> .grom-field-multiple-extra-fields > .grom-field-multiple-field.hidden")[0]) $container.find("> .grom-field-multiple-append-btn").fadeOut(300);
+        $container.find("> .grom-field-multiple-empty-text")[$container.find("> .grom-field-multiple-field:not(.grom-field-multiple-field_extra)")[0] ? "hide" : "show"]();
+        if (!$container.find("> .grom-field-multiple-field_extra")[0]) $container.find("> .grom-field-multiple-append-btn").fadeOut(300);
     }
 
     return {
@@ -21,11 +21,25 @@ yii.gromMultipleField = (function ($) {
                     e.preventDefault();
                 });
 
-                $container.on("click", "> div > .grom-field-multiple-field > .grom-field-multiple-close-btn", function (e) {
+                $container.on("click", "> .grom-field-multiple-field > .grom-field-multiple-close-btn", function (e) {
                     $(this).parent().hide(300, function () {
                         $(this).remove();
                         normalize($container);
                     });
+                    e.preventDefault();
+                });
+
+                $container.on("click", "> .grom-field-multiple-field > .grom-field-multiple-up-btn", function (e) {
+                    var row = $(this).parent();
+                    row.insertBefore(row.prev());
+
+                    e.preventDefault();
+                });
+
+                $container.on("click", "> .grom-field-multiple-field > .grom-field-multiple-down-btn", function (e) {
+                    var row = $(this).parent();
+                    row.insertAfter(row.next(':visible'));
+
                     e.preventDefault();
                 });
 

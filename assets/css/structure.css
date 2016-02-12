@@ -1,6 +1,7 @@
 .form-horizontal .form-group .form-group {
     margin-left: 0;
     margin-right: 0;
+    overflow: auto;
 }
 
 .well .well {
@@ -24,13 +25,35 @@
 }
 .grom-field-multiple-field {
     position: relative;
-    padding-right: 28px;
 }
-.grom-field-multiple-field .grom-field-multiple-close-btn {
-    position: absolute;
+.grom-field-multiple-field_extra {
+    display: none;
+}
+.grom-field-multiple-empty-text {
+    float: left;
+}
+.grom-field-multiple-append-btn {
+    float: right;
+}
+.grom-field-multiple-close-btn, .grom-field-multiple-up-btn, .grom-field-multiple-down-btn {
+    /*position: absolute;
     top: 0;
-    right: 0;
+    right: 0;*/
+    float: right;
+    margin-left: 10px;
+    font-size: 16px;
+    line-height: 34px;
+    opacity: 0.2;
+
+    background: transparent none repeat scroll 0 0;
+    border: 0 none;
+    cursor: pointer;
+    padding: 0;
 }
+.grom-field-multiple-close-btn:hover, .grom-field-multiple-up-btn:hover, .grom-field-multiple-down-btn:hover {
+    opacity: 0.5;
+}
+
 .grom-field-multiple-field > .form-group > label {
     display: none;
 }

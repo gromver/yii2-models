@@ -40,7 +40,6 @@ abstract class BaseField extends \yii\base\Object implements Arrayable
     public $label;
     public $hint;
     public $translation;
-    public $access;
 
     /**
      * @var mixed
