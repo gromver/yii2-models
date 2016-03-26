@@ -62,3 +62,12 @@
     width: auto;
     float: none;
 }
+
+.form-media-preview {
+    margin-top: 10px;
+}
+
+.form-media-preview img {
+    max-height: 100px;
+    max-width: 100%;
+}

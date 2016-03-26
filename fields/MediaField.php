@@ -10,6 +10,7 @@
 namespace gromver\models\fields;
 
 
+use gromver\models\widgets\MediaInput;
 use mihaildev\elfinder\InputFile;
 use Yii;
 
@@ -41,15 +42,17 @@ class MediaField extends BaseField
      */
     public function field($form, $options = [])
     {
-        return parent::field($form, $options)->widget(InputFile::className(), [
-            'language'      => Yii::$app->language,
-            'controller'    => $this->controller, // вставляем название контроллера, по умолчанию равен elfinder
-            'filter'        => 'image',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
-            'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
-            'options'       => ['class' => 'form-control'],
-            'buttonOptions' => ['class' => 'btn btn-default'],
-            'buttonName'    => Yii::t('gromver.models', 'Browse'),
-            'multiple'      => false       // возможность выбора нескольких файлов
+        return parent::field($form, $options)->widget(MediaInput::className(), [
+            'fileInputOptions' => [
+                'language'      => Yii::$app->language,
+                'controller'    => $this->controller, // вставляем название контроллера, по умолчанию равен elfinder
+                'filter'        => 'image',    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
+                'template'      => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
+                'options'       => ['class' => 'form-control'],
+                'buttonOptions' => ['class' => 'btn btn-default'],
+                'buttonName'    => Yii::t('gromver.models', 'Browse'),
+                'multiple'      => false      // возможность выбора нескольких файлов
+            ],
         ]);
     }
 

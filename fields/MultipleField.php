@@ -14,7 +14,6 @@ use gromver\models\ArrayModel;
 use gromver\models\BaseModel;
 use gromver\models\ObjectModel;
 use gromver\models\validators\MultipleValidator;
-use gromver\models\widgets\Fields;
 use Yii;
 use yii\base\Arrayable;
 use yii\base\ArrayableTrait;
